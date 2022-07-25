@@ -35,7 +35,12 @@ app.get("/api/:date", function (req, res) {
   // https://bobbyhadz.com/blog/javascript-get-unix-timestamp-from-date-string#:~:text=In%20short%2C%20to%20convert%20a,divide%20the%20result%20by%201000%20.
   const date = new Date(req.params.date);
   console.log(date);
-  res.json({unix: date.getTime()});
+  res.json({
+    unix: date.getTime(),
+    // Solution to utc timestamp conversion referenced from:
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toUTCString
+    utc: date.toUTCString()
+  });
 });
 
 
