@@ -36,6 +36,15 @@ app.get("/api/:date", function (req, res) {
   const date = new Date(isNaN(req.params.date) ?req.params.date : +req.params.date);
   
   console.log(date);
+
+  // Solution to check if date is valid adapted from:
+  // https://stackoverflow.com/a/10589791/5472560
+  if (!(date instanceof Date && !isNaN(date.valueOf()))) {
+    res.json({
+      error: "Invalid Date"
+    });
+    return;
+  }
   
   res.json({
     // Solution to timestamp string conversion to unix referenced from:
