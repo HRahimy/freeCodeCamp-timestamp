@@ -31,11 +31,15 @@ app.get("/api/hello", function (req, res) {
 });
 
 app.get("/api/:date", function (req, res) {
-  // Solution to timestamp string conversion to unix referenced from:
-  // https://bobbyhadz.com/blog/javascript-get-unix-timestamp-from-date-string#:~:text=In%20short%2C%20to%20convert%20a,divide%20the%20result%20by%201000%20.
-  const date = new Date(req.params.date);
+  // Solution to convert unix timestamp into Date object adapted from:
+  // https://stackoverflow.com/a/847196/5472560
+  const date = new Date(isNaN(req.params.date) ?req.params.date : +req.params.date);
+  
   console.log(date);
+  
   res.json({
+    // Solution to timestamp string conversion to unix referenced from:
+    // https://bobbyhadz.com/blog/javascript-get-unix-timestamp-from-date-string#:~:text=In%20short%2C%20to%20convert%20a,divide%20the%20result%20by%201000%20.
     unix: date.getTime(),
     // Solution to utc timestamp conversion referenced from:
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toUTCString
