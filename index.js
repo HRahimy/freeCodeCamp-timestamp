@@ -30,6 +30,15 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello my API'});
 });
 
+app.get("/api", function (req, res) {
+  const date = new Date(Date.now());
+
+  res.json({
+    unix: date.getTime(),
+    utc: date.toUTCString()
+  });
+});
+
 app.get("/api/:date", function (req, res) {
   // Solution to convert unix timestamp into Date object adapted from:
   // https://stackoverflow.com/a/847196/5472560
