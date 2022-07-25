@@ -31,6 +31,8 @@ app.get("/api/hello", function (req, res) {
 });
 
 app.get("/api/:date", function (req, res) {
+  // Solution to timestamp string conversion to unix referenced from:
+  // https://bobbyhadz.com/blog/javascript-get-unix-timestamp-from-date-string#:~:text=In%20short%2C%20to%20convert%20a,divide%20the%20result%20by%201000%20.
   const date = new Date(req.params.date);
   console.log(date);
   res.json({unix: date.getTime()});
