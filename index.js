@@ -10,6 +10,12 @@ var app = express();
 var cors = require('cors');
 app.use(cors({optionsSuccessStatus: 200}));  // some legacy browsers choke on 204
 
+// Log all requests
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.path} - ${req.ip}`);
+  next();
+});
+
 // http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'));
 
@@ -22,6 +28,12 @@ app.get("/", function (req, res) {
 // your first API endpoint... 
 app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello my API'});
+});
+
+app.get("/api/:date", function (req, res) {
+  const date = new Date(req.params.date);
+  console.log(date);
+  res.json({unix: date.getTime()});
 });
 
 
